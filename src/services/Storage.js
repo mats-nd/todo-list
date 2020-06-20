@@ -36,8 +36,11 @@ export const addNote = title => {
     title: title,
     todos: []
   };
+
   notes.unshift(element);
   setNotes(notes);
+
+  return element
 }
 
 /**

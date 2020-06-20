@@ -1,21 +1,17 @@
 <template>
   <div class="add">
     <ui-card>
-      <template slot="heading">
-        <h1>Add note</h1>
-      </template>
-      <ui-input v-model="title" label="Note name" class="mb-4" />
-      <ui-button
-        tag="router-link"
-        :to="`/note/${getLastId(notes)}`"
-        @click.native="addNote(title)"
-      >Continue</ui-button>
+      <h1 slot="heading">Add note</h1>
+      <form @submit.prevent="onSubmit">
+        <ui-input v-model="title" label="Note name" class="mb-4" />
+        <ui-button type="submit">Continue</ui-button>
+      </form>
     </ui-card>
   </div>
 </template>
 
 <script>
-import { getNotes, addNote, getLastId } from "@/services/Storage";
+import { getNotes, addNote } from "@/services/Storage";
 
 export default {
   data() {
@@ -28,8 +24,11 @@ export default {
     document.querySelector("input").focus();
   },
   methods: {
-    getLastId,
-    addNote
+    onSubmit() {
+      const note = addNote(this.title);
+      this.$router.push({ name: "note_id", params: { id: note.id } });
+      this.$toast.success("Note created");
+    }
   }
 };
 </script>
