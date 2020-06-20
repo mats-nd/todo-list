@@ -1,0 +1,26 @@
+.ui-input {
+  display: block;
+  
+  &__label {
+    font-size: 13px;
+    color: #616d77;
+    margin-bottom: 4px;
+  }
+
+  &__input {
+    min-height: 40px;
+    display: block;
+    width: 100%;
+    outline: none;
+    border: 1px solid $gray;
+    border-radius: 4px;
+    padding: 0 16px;
+    transition: $default-transition;
+    font-size: 15px;
+
+    &:focus {
+      border-color: lighten($color: $primary-color, $amount: 30%) !important;
+      box-shadow: 0 0 0 2px $light-blue;
+    }
+  }
+}

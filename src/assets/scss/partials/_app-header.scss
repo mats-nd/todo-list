@@ -1,0 +1,21 @@
+.app-header {
+  background: #2b2b2b;
+  padding: 12px 0;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 4;
+  background: rgba($color: #000, $alpha: 0.8);
+
+  @supports (backdrop-filter: saturate(180%) blur(15px)) {
+    backdrop-filter: saturate(50%) blur(8px);
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+}
