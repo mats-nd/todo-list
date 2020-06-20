@@ -33,15 +33,19 @@
       <!-- Controls -->
       <div class="d-flex">
         <ui-button @click="saveChanges($route.params.id, note)">Save changes</ui-button>
+        <ui-button theme="secondary" class="ml-3" @click="modal.cancel = true">Cancel</ui-button>
         <ui-button theme="secondary" class="ml-3" @click="discardChanges">Discard changes</ui-button>
         <div class="spacer"></div>
-        <ui-button theme="danger" class="ml-3" @click="removeNote">Remove note</ui-button>
+        <ui-button theme="danger" class="ml-3" @click="modal.remove = true">Remove note</ui-button>
       </div>
     </ui-card>
 
     <h1 v-else>404 Not found</h1>
 
-    <ui-confirmbox v-model="confirmModal" @confirm="onConfirm" />
+    <!-- ConfirmBox for remove -->
+    <ui-confirmbox v-model="modal.remove" @confirm="onConfirm" />
+    <!-- ConfirmBox for cancel -->
+    <ui-confirmbox v-model="modal.cancel" @confirm="routeToHome" />
   </div>
 </template>
 
@@ -60,7 +64,10 @@ export default {
       tempNote: getNoteById(this.$route.params.id),
       editNoteTitle: false,
       todoTitle: "",
-      confirmModal: false
+      modal: {
+        remove: false,
+        cancel: false
+      }
     };
   },
   methods: {
@@ -81,9 +88,12 @@ export default {
     removeNote() {
       this.confirmModal = true;
     },
+    routeToHome() {
+      this.$router.push({ path: "/" });
+    },
     onConfirm() {
       removeNoteById(this.$route.params.id);
-      this.$router.push({ path: "/" });
+      this.routeToHome();
       this.$toast.success("Note deleted");
     },
     discardChanges() {
