@@ -2,7 +2,7 @@
   <div class="add">
     <ui-card>
       <h1 slot="heading">Add note</h1>
-      <form @submit.prevent="onSubmit">
+      <form class="mt-4" @submit.prevent="onSubmit">
         <ui-input v-model="title" label="Note name" class="mb-4" />
         <ui-button type="submit">Continue</ui-button>
       </form>

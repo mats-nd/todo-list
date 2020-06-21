@@ -2,13 +2,13 @@
   <div class="home">
     <template v-if="notes.length">
       <ui-card v-for="(note, idx) in notes" :key="`note_${idx}`">
-        <div class="d-flex justify-space-between">
+        <template slot="heading">
           <h2>{{ note.title }}</h2>
-          <div class="ml-3">
+          <div class="ui-card__controls">
             <ui-button tag="router-link" :to="`/note/${note.id}`" theme="secondary">Edit</ui-button>
             <ui-button theme="danger" class="ml-3" @click="removeNote(note.id)">Remove</ui-button>
           </div>
-        </div>
+        </template>
         <template v-if="note.todos.length">
           <div class="mt-4 mb-4">
             <div

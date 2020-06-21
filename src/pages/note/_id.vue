@@ -3,14 +3,14 @@
     <ui-card v-if="note">
       <!-- Note title -->
       <template slot="heading">
-        <h1 v-if="!editNoteTitle">{{ note.title }}</h1>
+        <h1 v-if="!editNoteTitle" class="truncate">{{ note.title }}</h1>
         <ui-input v-else v-model="note.title" />
-        <ui-button @click="editNoteTitle = !editNoteTitle">Edit title</ui-button>
+        <ui-button class="ui-card__controls" @click="editNoteTitle = !editNoteTitle">Edit title</ui-button>
       </template>
 
       <!-- Add todo -->
-      <form class="d-flex align-items-end mb-4" @submit.prevent="addTodo(note, todoTitle)">
-        <ui-input v-model="todoTitle" label="Todo title" />
+      <form class="d-flex align-items-end mt-4 mb-4" @submit.prevent="addTodo(note, todoTitle)">
+        <ui-input v-model="todoTitle" label="New todo" />
         <ui-button type="submit" theme="secondary" class="ml-3">Add Todo</ui-button>
       </form>
 
@@ -31,7 +31,7 @@
       <div class="alert alert--warning mb-4" v-else>No todos yet</div>
 
       <!-- Controls -->
-      <div class="d-flex">
+      <div class="d-flex flex-wrap">
         <ui-button @click="saveChanges($route.params.id, note)">Save changes</ui-button>
         <ui-button theme="secondary" class="ml-3" @click="modal.cancel = true">Cancel</ui-button>
         <ui-button theme="secondary" class="ml-3" @click="discardChanges">Discard changes</ui-button>
